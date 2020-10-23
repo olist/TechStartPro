@@ -16,6 +16,12 @@ Este repositório contém um problema usado para avaliar as habilidades do candi
 * Apreciamos a simplicidade, portanto, crie uma boa configuração de projeto que nos ajudará na sua avaliação;
 * Por favor, faça testes ... nós apreciamos testes <3 ... testes tornam o mundo melhor.
 
+# Como participar
+* Faça um fork deste repositório no Github. Se você não pode criar um fork público deste projeto, faça um repositório privado e adicione permissão de leitura para o usuário abaixo:
+  + mgranemann
+* Siga as instruções do README.md (este arquivo);
+* Candidate-se ao cargo na nossa página de carreiras com o link para o fork no Github.
+  + caso ja tenha realizado a candidatura na pagina de carreiras sem o envio do desafio, responda ao e-mail que lhe foi enviado pela equipe do seleção com o link do seu repositório.
 
 
 
