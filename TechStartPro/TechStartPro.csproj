@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
@@ -38,12 +39,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\app\interface\ICategory.ts" />
-    <None Remove="ClientApp\src\app\interface\IProduct.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ClientApp\service\" />
+    <None Remove="ClientApp\src\app\interface\category.ts" />
+    <None Remove="ClientApp\src\app\interface\product.ts" />
+    <None Remove="ClientApp\src\app\interface\productcategory.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -1,8 +1,15 @@
 <h1>Upload de Categorias</h1>
 
-<form>
-  <div class="form-group">
-    <label for="exampleFormControlFile1">Example file input</label>
-    <input type="file" class="form-control-file" id="exampleFormControlFile1">
-  </div>
-</form>
+<div [hidden]="submitted">
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="exampleFormControlFile1">Escolha um arquivo csv com as categorias para adicionar no banco de dados.</label>
+      <input type="file" class="form-control-file" id="exampleFormControlFile1" accept=".csv" (change)="handleFileSelect($event)">
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+  </form>
+</div>
+
+<div [hidden]="!submitted">
+  <h4>Categorias Adicionadas!</h4>
+</div>

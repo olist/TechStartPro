@@ -9,12 +9,11 @@ namespace TechStartPro.Models
 {
     public class Category : IEntity
     {
-        [Key]
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(60)]
         public string Name { get; set; }
+
+        public ICollection<ProductCategory> ProductCategory { get; set; }
 
     }
 }

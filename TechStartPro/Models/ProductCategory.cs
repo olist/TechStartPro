@@ -10,10 +10,12 @@ namespace TechStartPro.Models
 {
     public class ProductCategory
     {
-        [ForeignKey("ProductForeignKey")]
         public int ProductId { get; set; }
 
-        [ForeignKey("CategoryForeignKey")]
+        public Product Product { get; set; }
+
         public int CategoryId { get; set; }
+
+        public Category Category { get; set; }
     }
 }

@@ -23,7 +23,18 @@ namespace TechStartPro.Data.EFCore
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Product>().Property(p => p.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<Category>().Property(p => p.Id).ValueGeneratedOnAdd();
-            modelBuilder.Entity<ProductCategory>().HasNoKey();
+
+            modelBuilder.Entity<ProductCategory>()
+                .HasKey(pc => new { pc.ProductId, pc.CategoryId });
+            modelBuilder.Entity<ProductCategory>()
+                .HasOne(pc => pc.Product)
+                .WithMany(p => p.ProductCategory)
+                .HasForeignKey(pc => pc.ProductId);
+            modelBuilder.Entity<ProductCategory>()
+                .HasOne(pc => pc.Category)
+                .WithMany(c => c.ProductCategory)
+                .HasForeignKey(pc => pc.CategoryId);
+
         }
     }
 }
