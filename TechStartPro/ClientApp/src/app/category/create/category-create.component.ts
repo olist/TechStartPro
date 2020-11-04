@@ -28,14 +28,15 @@ export class CategoryCreateComponent implements OnInit {
   }
 
   save() {
+    console.log(this.category)
     this.service.post('categories', this.category).subscribe(result => console.log(result));
   }
 
   onSubmit() {
     this.submitted = true;
     for (let i = 0; i < this.categoryList.length; i++) {
-      this.category.name = this.categoryList[i].Nome
-      this.category.id = 0
+      this.category.name = this.categoryList[i].name;
+      this.category.id = 0;
       this.save();
     }
   }

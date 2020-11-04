@@ -21,7 +21,8 @@ namespace TechStartPro.Models
         public ICollection<ProductCategory> ProductCategory { get; set; }
 
         [NotMapped]
-        public ICollection<Category> Categories { get; set; }
+        public virtual ICollection<Category> Categories { get; set; }
 
     }
+
 }

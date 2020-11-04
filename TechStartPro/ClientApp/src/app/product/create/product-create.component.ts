@@ -32,7 +32,7 @@ export class ProductCreateComponent implements OnInit {
 
   save() {
     this.service
-      .post('products/postproduct', this.product).subscribe(data => {
+      .post('products', this.product).subscribe(data => {
         console.log(data);
         this.product = new Products();
         this.gotoList();

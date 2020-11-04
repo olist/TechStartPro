@@ -12,7 +12,7 @@ import { Products } from '../../interface/product';
 })
 export class ProductListComponent implements OnInit {
 
-  products: Observable<Products[]>;
+  products: Products[];
 
   constructor(private service: RestService, private router: Router) { }
 
@@ -21,7 +21,10 @@ export class ProductListComponent implements OnInit {
   }
 
   reloadData() {
-    this.products = this.service.get('products/getall');
+    this.service.get('products').subscribe(result => {
+      this.products = result;
+      console.log(this.products);
+    });
   }
 
   navigateToProductCreate() {
@@ -29,7 +32,7 @@ export class ProductListComponent implements OnInit {
   }
 
   deleteProduct(id: number) {
-    this.service.delete('products/deleteproduct', id)
+    this.service.delete('products', id)
       .subscribe(
         data => {
           console.log(data);
