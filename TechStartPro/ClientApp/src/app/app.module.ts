@@ -33,7 +33,7 @@ import { ProductEditComponent } from './product/edit/product-edit.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'product-create', component: ProductCreateComponent },
       { path: 'category-create', component: CategoryCreateComponent },
-      { path: 'product-edit', component: ProductEditComponent },
+      { path: 'product-edit/:id', component: ProductEditComponent },
       { path: 'product-list', component: ProductListComponent }
     ])
   ],

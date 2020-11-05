@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Razor.Language;
+using Microsoft.CodeAnalysis.FlowAnalysis;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -58,6 +59,49 @@ namespace TechStartPro.Data.EFCore
             var products = await context.Product.Include(p => p.ProductCategory).ThenInclude(op => op.Category).ToListAsync();
 
             return products;
+        }
+
+        public async Task<Product> GetProductById(int id)
+        {
+            var product = await context.Product.FindAsync(id);
+            product.Categories = new List<Category>();
+
+            var productCategories = context.ProductCategory.Include(c => c.Category).Where(p => p.ProductId == id);
+
+            productCategories.ToList().ForEach(c =>
+            {
+                product.ProductCategory.Add(c);
+                product.Categories.Add(c.Category);
+            });
+
+            return product;
+        }
+
+        public async Task<Product> UpdateProduct(Product product)
+        {
+            product.Categories = product.Categories ?? new List<Category>();
+            product.ProductCategory = product.ProductCategory ?? new List<ProductCategory>();
+
+            if (!product.ProductCategory.Equals(product.Categories)) {
+
+                List<ProductCategory> listProductCategory = new List<ProductCategory>();
+
+                product.Categories.ToList().ForEach(c => {
+                    listProductCategory.Add(new ProductCategory
+                    {
+                        ProductId = product.Id,
+                        CategoryId = c.Id
+                    });
+                });
+
+                context.ProductCategory.RemoveRange(product.ProductCategory);
+                context.ProductCategory.AddRange(listProductCategory);
+                product.ProductCategory = listProductCategory;
+            }
+            
+            context.Entry(product).State = EntityState.Modified;
+            await context.SaveChangesAsync();
+            return product;
         }
 
     }

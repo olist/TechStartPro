@@ -12,28 +12,36 @@ import { RestService } from '../../../../service/rest-service';
   styleUrls: ['./product-edit.component.css']
 })
 export class ProductEditComponent implements OnInit {
-
+  product: Products = new Products();
+  categories: Categories[];
   id: number;
-  product: Products;
   submitted = false;
 
-  constructor(private service: RestService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private service: RestService, private router: Router, private route: ActivatedRoute) {
+    this.route.params.subscribe(params => {
+      this.productConstructor(params['id']);
+    });
+  }
 
   ngOnInit() {
-    this.product = new Products();
+    this.getCategories();
+  }
 
-    this.id = this.route.snapshot.params['id'];
+  productConstructor(id: string) {
+    this.service.get(`products/${id}`).subscribe(result => {
+      this.product = result;
+    });
+  }
 
-    this.service.get('products/get')
-      .subscribe(data => {
-        console.log(data)
-        this.product = data;
-      }, error => console.log(error));
+  getCategories() {
+    this.service.get("categories").subscribe(result => {
+      this.categories = result;
+    });
   }
 
   save() {
     this.service
-      .put('products', this.service).subscribe(data => {
+      .put(`products/${this.product.id}`, this.product).subscribe(data => {
         console.log(data)
         this.product = new Products();
         this.gotoList();

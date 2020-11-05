@@ -27,6 +27,12 @@ namespace TechStartPro.Controllers
             return await repository.GetAllProducts();
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Product>> Get(int id)
+        {
+            return await repository.GetProductById(id);
+        }
+
         [HttpPost]
         public async Task<ActionResult<Product>> Post(Product product)
         {
@@ -43,6 +49,18 @@ namespace TechStartPro.Controllers
                 return NotFound();
             }
             return product;
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, Product product)
+        {
+            if (id != product.Id)
+            {
+                return BadRequest();
+            }
+
+            await repository.UpdateProduct(product);
+            return NoContent();
         }
     }
 }
